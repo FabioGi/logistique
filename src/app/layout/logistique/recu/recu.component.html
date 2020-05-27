@@ -1,0 +1,108 @@
+<mat-card id="print-section" *ngIf="facture" >
+    <mat-card-header>
+        <mat-card-title>FACTURE CLIENT</mat-card-title>
+        <mat-card-subtitle>Abidjan
+          <table cellspacing="20">
+            <h3>Statut :{{facture.facture}}</h3>
+            <tr>
+                <td>
+                        <strong>Client:</strong> {{facture.nom_client}}  {{facture.prenom_client}}  +225 {{facture.contact_client}} 
+                </td>
+
+                <td> 
+                        <strong>Destinataire:</strong>  {{ facture.nom_destinataire}}  {{ facture.prenom_destinataire}}  +225 {{facture.contact_destinataire}}
+                </td>
+            </tr>
+
+            <tr>
+                    <td>
+                         <strong>N° Colis:</strong> {{facture.numero_colis}}
+                    </td>
+                   <td>
+                      <strong>Code Colis:</strong> {{facture.code_colis }} <br>
+                   </td>	
+                  
+          </tr>
+          </table>
+        </mat-card-subtitle>
+
+    </mat-card-header>
+    <mat-card-content>
+      <!-- <div id="print-section">
+          <ngx-qrcode qrc-element-type="url" [qrc-value]="ngxQrcode2" ></ngx-qrcode >
+      </div> -->
+        <br>
+        <header>
+            <h1>Facture N° {{id}}</h1>
+        </header>
+        
+        <div class="wrapper">
+          <nav id="navigation" role="navigation">
+            <div  class="qr">
+                <ngx-qrcode qrc-element-type="url" [qrc-value]="ngxQrcode2" ></ngx-qrcode >
+            </div>
+            <button class="doNotPrint"  mat-raised-button color="primary" (click)="print()">Imprimer QR CODE</button> 
+            <!-- <a href="#">Picon bière</a> -->
+          </nav>
+          <section class="content">
+              <table id="customers">
+                  <tr>
+                    <th>Numero</th>
+                    <th>Quantite</th>
+                    <th>Designation</th>
+                    <th>Prix unitaire</th>
+                    <th>Prix totale</th>
+                  </tr>
+                  <tr *ngFor="let paquet of facture.paquets" >
+                    <td>{{paquet.numero}}</td>
+                    <td>{{paquet.quantite}}</td>
+                    <td>{{paquet.prix_unitaire}}</td>
+                    <td>{{paquet.designation}}</td>
+                    <td>{{paquet.valeur}}</td>
+                  </tr>
+                  <tr>
+                      <td>Totale:</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>{{facture.totale}}</td>
+                  </tr>
+                </table>
+                
+            <!-- <h2>Flexbox c'est la vie, Hopla !</h2>
+            <p><code>flex: 1;</code></p>
+            <p>Lorem Elsass ipsum lacus leverwurscht Wurschtsalad mamsell Gal. gewurztraminer turpis, suspendisse commodo Oberschaeffolsheim ornare aliquam semper Miss Dahlias Mauris turpis sagittis kuglopf eleifend dignissim baeckeoffe geht's Richard Schirmeck mollis habitant schnaps ante et sit leo schpeck sit Salu bissame Salut bisamme varius quam. amet elementum nullam bissame bredele Heineken picon bière gal sed risus, condimentum Verdammi ch'ai ac réchime météor barapli s'guelt quam, non Christkindelsmärik blottkopf, Carola tellus rucksack vielmols, Gal !</p> -->
+          </section>
+        </div> <!-- /wrapper -->
+        
+        <footer>  
+              <form #data="ngForm" (ngSubmit)="onSubmit(data)" *ngIf="facture.facture == 'non facturé'" >
+                            <table cellspacing="0">
+                                    <tr>
+                                            <td>
+                                               <strong>Frais depart:</strong> {{facture.frais_magasin_depart}}
+                                            </td>
+                                           
+                                   </tr>
+                                   <tr>
+                                            <td>
+                                                    <mat-form-field >
+                                                            <input matInput placeholder="frais d'arrivées" type="number"
+                                                                ngModel #money="ngModel" value="{{facture.frais_magasin_dest}}"
+                                                                name="money">
+                                                     </mat-form-field>
+                                             </td>
+            
+                                    </tr>
+                    
+
+                          </table>
+                
+                        <button mat-fab type="submit" color="warn">
+                            <mat-icon>save</mat-icon> 
+                        </button>
+                </form>
+        </footer>
+
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,66 @@
+<button (click)="print_page()" mat-raised-button type="button" color="black" ><mat-icon>print</mat-icon></button>	
+<div class="A4" id="print-section">
+      <!-- <header>
+          <div class="logo1">
+              <ngx-qrcode qrc-element-type="url" [qrc-value]="ngxQrcode2" ></ngx-qrcode >
+          </div>
+          <div class="logo2">
+              <img mat-card-image [src]="imgSrc" >
+          </div>
+        </header> -->
+        <header>
+            <h1>FACTURE</h1>
+            <h2>SITM LOGISTIQUE</h2>
+            <ngx-qrcode qrc-element-type="url" [qrc-value]="ngxQrcode2" ></ngx-qrcode >
+         </header>
+        <h1>REÇU</h1>
+        <h2>SITM LOGISTIQUE</h2>
+      <section class="flex">
+        <dl>
+          <dt>REÇU #</dt>
+          <dd>{{id}}sitm</dd>
+          <dt>Date de facturation</dt>
+          <dd>{{d | date:'dd/MM/yyyy'}}</dd>
+          <dt>Numero Colis</dt>
+          <dd>{{facture.numero_colis}}</dd>
+        </dl>
+      </section>
+      <section class="flex">
+        <dl class="bloc">
+          <dt>Client</dt>
+          <dd>
+            STIM & COMPANY, ABIDJAN <br>
+            adresse ... <br>
+            <dl>
+              <dt>INFO</dt>
+              <dd>{{facture.nom_client}} {{facture.prenom_client}} </dd>
+              <dt>Téléphone</dt>
+              <dd> +225 {{facture.contact_client}}</dd>
+            </dl>
+          </dd>
+        </dl>
+        <dl class="bloc">
+            <dt>Destinataire</dt>
+            <dd>
+              STIM & COMPANY, ABIDJAN <br>
+              adresse ... <br>
+              <dl>
+                <dt>INFO</dt>
+                <dd>{{facture.nom_destinataire}} {{facture.prenom_destinataire}} </dd>
+                <dt>Téléphone</dt>
+                <dd> +225 {{facture.contact_destinataire}}</dd>
+              </dl>
+            </dd>
+        </dl>
+      </section>
+      <section class="flex">
+          <h3>Montant Totale: <strong>{{facture.totale}}&#8202;FCFA</strong></h3>
+      </section>
+
+      <footer>
+         stim logistique
+      </footer>
+    
+</div>
+
+ 

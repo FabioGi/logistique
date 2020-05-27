@@ -1,0 +1,13 @@
+<form   #Form="ngForm" (ngSubmit)="onSubmit(Form)">
+        <tr>
+            <td>
+                <mat-form-field >
+                        <input matInput placeholder="veuillez saisir l'identifiant"
+                            ngModel #parameter="ngModel" name="parameter">
+                </mat-form-field>
+            </td>
+            <td>
+                 <button mat-fab type="submit" color="primary">valider</button>
+            </td>
+        </tr>
+    </form>

@@ -1,0 +1,10 @@
+<form   #Form="ngForm" (ngSubmit)="onSubmit(Form)">
+        <mat-form-field >
+                <input matInput placeholder="veuillez modifier le pourcentage additionnel" value="{{param}}"
+                    ngModel #parameter="ngModel"
+                    name="parameter">
+              </mat-form-field>
+        <button mat-fab type="submit" color="warn">
+            <mat-icon>save</mat-icon> 
+        </button>
+</form>

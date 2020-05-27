@@ -1,0 +1,126 @@
+mat-card-title {
+	font-size: 1.2em !important;
+	line-height: 0.5em;
+	font-weight: 300;
+}
+
+
+.ta-r {
+	text-align: right;
+}
+
+
+
+textarea {
+   /*border: 1px dotted #FFF;*/
+   padding: 5px 0;
+   color: #333;
+   font-size: 0.9em;   
+}
+
+
+textarea:enabled {
+    /*background: #ddd;*/
+    /*border: 1px dotted #333;*/
+    border-bottom: 1px solid #7F7F7F;
+    
+}
+
+.fiche-technique-label {
+	color: #999999;
+}
+
+button {
+  margin-left: 10px !important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+
+/* Layout */
+html {display: flex; flex-direction: column;} /* IE fix */
+body {
+  display: flex; /* crée un contexte flex pour ses enfants */
+  flex-direction: column; /* affichage vertical */
+  min-height: 100vh; /* toute la hauteur du viewport (compatible IE9+) */
+}
+.wrapper {
+  display: block; /* IE fix */
+  flex: 1 1 auto; /* occupe la hauteur restante */
+  display: flex; /* crée un contexte flex pour ses enfants */
+  flex-direction: row; /* affichage horizontal */
+}
+nav {
+  width: 15em;
+}
+.content {
+  display: block; /* IE fix */
+  flex: 1; /* occupe la largeur restante */
+}
+
+
+/* Responsive */
+
+@media (max-width: 640px) {
+	body {
+  min-height: 0; 
+}
+	.wrapper {
+    flex-direction: column;
+  }
+	.content {
+		flex-basis: auto;
+	}
+  nav {
+    width: auto;
+    order: 1;
+  }
+}
+
+/* Decoration */
+
+body {
+	margin: 0;
+	background: #fff;
+	font-family: "Century Gothic", helvetica, arial, sans-serif;
+	font-size: 1.1em;
+}
+header, nav, section, footer {
+	padding: 10px;
+	margin: 0;
+	border:2px solid rgba(255,255,255,.3);
+	border-radius: 10px;
+	color: rgb(29, 27, 27);
+}
+header {
+	// background: rgb(148, 148, 233);
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,.3);
+}
+nav {
+	// background:rgb(148, 148, 233);
+}
+nav a {
+  display: block;
+  padding: .5em 1em;
+  color: rgb(24, 23, 23);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,.3);
+}
+section {
+	// background: rgb(148, 148, 233);
+}
+footer {
+	// background: rgb(148, 148, 233);
+  text-align: inline-block;
+  border-bottom: 1px solid rgba(255,255,255,.3);
+}
+
+.qr{
+  float: right;
+}
+
+
+

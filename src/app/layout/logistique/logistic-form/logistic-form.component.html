@@ -1,0 +1,300 @@
+
+    <mat-card class="br-20" *ngIf="!showQRcode" >
+        <br>
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image">
+                <mat-icon matListIcon>face</mat-icon>
+            </div>	
+            <mat-card-title>Enregistrement client</mat-card-title>
+            <mat-card-subtitle>Nouvelle operation</mat-card-subtitle>
+        </mat-card-header>
+        <form #newClientForm="ngForm" (ngSubmit)="onSubmit(newClientForm)">
+        <mat-card-content>
+                <table cellspacing="0">
+                       <tr *ngIf="!showAddClient">
+                              <td>
+                                    <mat-form-field>
+                                            <mat-select placeholder="Selectionnez un client"
+                                            ngModel #selectClient="ngModel" required
+                                            name="selectClient">
+                                                <mat-option *ngFor="let client of clients" [value]="client" (click)="showSelectClient=true">
+                                                {{client.nom_client}}
+                                                </mat-option>
+                                            </mat-select>
+                                    </mat-form-field>
+                                 </td>
+                                 <td>
+                                        <button mat-button type="button" color="black" *ngIf="!showSelectClient" 
+                                            (click)="showAddClient=true">
+                                            <mat-icon>add</mat-icon>Ajouter un client
+                                        </button>	 
+                                 </td>	
+                        </tr>
+        
+                    <tr *ngIf="showAddClient">
+ 
+                      <td>
+                          <mat-form-field >
+                            <input matInput placeholder="Nom client" required
+                                ngModel #newClientfirstname="ngModel"
+                                name="newClientfirstname">
+                          </mat-form-field>
+                      </td>
+                      <td>
+                          <mat-form-field >
+                            <input matInput placeholder="Prenom client" required
+                            ngModel #newClientlastname="ngModel"
+                            name="newClientlastname">
+                          </mat-form-field>
+                      </td>
+                      <td>
+                            <mat-form-field>
+                              <input matInput placeholder="Contact client" required
+                              ngModel #newClientContact="ngModel"
+                              name="newClientContact">
+                            </mat-form-field>
+                        </td>
+                        <td>
+                                <mat-form-field>
+                                  <input matInput placeholder="Adresse client" required
+                                  ngModel #newClientAdresse="ngModel"
+                                  name="newClientAdresse">
+                                </mat-form-field>
+                        </td>
+                  </tr>
+                  <tr *ngIf="!showAddDestinataire">
+                        <td>
+                              <mat-form-field>
+                                      <mat-select placeholder="Selectionnez un destinataire"
+                                      ngModel #selectDestinataire="ngModel" required
+                                      name="selectDestinataire">
+                                          <mat-option *ngFor="let dest of destinataire" [value]="dest" (click)="showSelectDestinataire=true">
+                                          {{dest.nom_client}}
+                                          </mat-option>
+                                      </mat-select>
+                              </mat-form-field>
+                           </td>
+                           <td>
+                                  <button mat-button type="button" color="black" *ngIf="!showSelectDestinataire" 
+                                      (click)="showAddDestinataire=true">
+                                      <mat-icon>add</mat-icon>Ajouter un destinataire
+                                  </button>	 
+                           </td>	
+                  </tr>
+                  <tr *ngIf="showAddDestinataire">
+                        <td>
+                            <mat-form-field>
+                              <input matInput placeholder="Nom destinataire" required
+                                  ngModel #newDestfirstname="ngModel"
+                                  name="newDestfirstname">
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field>
+                              <input matInput placeholder="Prenom destinataire" required
+                              ngModel #newDestlastname="ngModel"
+                              name="newDestlastname">
+                            </mat-form-field>
+                        </td>
+                        <td>
+                              <mat-form-field>
+                                <input matInput placeholder="Contact destinataire" required
+                                ngModel #newDestContact="ngModel"
+                                name="newDestContact">
+                              </mat-form-field>
+                          </td>
+                          <td>
+                                  <mat-form-field>
+                                    <input matInput placeholder="Adresse destinataire" required
+                                    ngModel #newDestAdress="ngModel"
+                                    name="newDestAdress">
+                                  </mat-form-field>
+                          </td>
+                    </tr>
+                  <tr>
+                      <td>
+                          <mat-form-field>
+                            <input matInput mat-maxlength="3" placeholder="N° Colis" required
+                            ngModel name="newClientcolis">
+                          </mat-form-field>    				
+                      </td> 
+
+                      <td>
+                        <mat-form-field class="add-client-full-width">
+                          <input matInput placeholder="Frais magasinage" type="number"
+                          ngModel name="newFraisdepart">
+                        </mat-form-field>    				
+                      </td>
+    
+                  </tr>	
+                  
+                  <!-- <tr>
+                        <td>
+                            <mat-form-field class="add-client-full-width">
+                              <input matInput placeholder="Frais magasinage" type="number"
+                              ngModel name="newFraisdepart">
+                            </mat-form-field>    				
+                        </td>
+            
+                    </tr>  -->
+                  <tr>
+                      <td>
+                          <mat-form-field>
+                                <mat-select placeholder="Nombre de paquet"
+                                ngModel #newClientNbrePaq="ngModel" required
+                                name="newClientNbrePaq">
+                                    <mat-option *ngFor="let panier of paniers" [value]="panier" (click)="getValue(newClientForm.value.newClientNbrePaq)">
+                                    {{panier}}
+                                    </mat-option>
+                                </mat-select>
+                          </mat-form-field>
+                      </td>
+
+                  </tr> 
+                  
+                  <tr *ngFor="let item of Value; let i=index" >
+                        <td>
+                           <strong>Paquet</strong> {{item +1}}
+                        </td>
+
+                        <td>
+                            <mat-form-field>
+                                <input matInput placeholder="Quantite" type="number" required
+                                ngModel name="newClientQte" (blur) ="getqteValue(newClientForm.value.newClientQte)">
+                              </mat-form-field>
+                         </td>
+
+                         <td>
+                            <mat-form-field class="add-client-full-width">
+                              <input matInput placeholder="Designation" required
+                              ngModel name="newClientDesignation" (blur) ="getdesignationValue(newClientForm.value.newClientDesignation)">
+                            </mat-form-field>
+                        </td>
+
+                        <td>
+                            <mat-form-field class="add-client-full-width">
+                              <input matInput placeholder="Prix" type="number" required
+                              ngModel name="newClientPrixUnitaire" (blur) ="getPriceValu(newClientForm.value.newClientPrixUnitaire)">
+                            </mat-form-field>
+    
+                        </td>
+                
+                </tr>
+                <tr>
+                   <td>
+                    <h2><strong>Totale:</strong> {{  formValue }}</h2> 
+                   </td>
+                </tr>
+              </table>
+        </mat-card-content>
+    
+        <mat-card-actions>
+    
+            <button mat-fab (click)="goBack()" type="button" color="black">
+                <mat-icon>keyboard_arrow_left</mat-icon>
+            </button>
+    
+            <button mat-fab type="submit" color="warn"
+                [disabled]="!newClientForm.form.valid">
+                <mat-icon>save</mat-icon> 
+            </button>
+
+            <button mat-fab type="button"  color="warn" (click)="cancel()">
+                 <mat-icon>cancel</mat-icon> 
+            </button>
+    
+        </mat-card-actions>
+    </form>
+    
+    </mat-card>
+
+
+<button (click)="print()" mat-raised-button type="button" color="black" *ngIf="showQRcode"><mat-icon>print</mat-icon></button>	
+<div class="A4" id="print-section" *ngIf="showQRcode">
+    <header>
+        <h1>FACTURE</h1>
+        <h2>SITM LOGISTIQUE</h2>
+        <ngx-qrcode qrc-element-type="url" [qrc-value]="ngxQrcode2" ></ngx-qrcode >
+     </header>
+      <section class="flex">
+        <dl>
+          <dt>REÇU #</dt>
+          <dd>{{id}}</dd>
+          <dt>Date </dt>
+          <dd>{{d | date:'dd/MM/yyyy'}}</dd>
+          <dt>Numero Colis</dt>
+          <dd>{{numero_colis}}</dd>
+        </dl>
+      </section>
+      <section class="flex">
+        <dl class="bloc">
+          <dt>Client</dt>
+          <dd>
+            STIM & COMPANY, ABIDJAN <br>
+            adresse ... <br>
+            <dl>
+              <dt>INFO</dt>
+              <dd> {{clientname}} {{ clientlastname }} </dd>
+              <dt>Téléphone</dt>
+              <dd> +225 {{contact_client}}</dd>
+            </dl>
+          </dd>
+        </dl>
+        <dl class="bloc">
+            <dt>Destinataire</dt>
+            <dd>
+              STIM & COMPANY, ABIDJAN <br>
+              adresse ... <br>
+              <dl>
+                <dt>INFO</dt>
+                <dd> {{ nom_destinataire}}  {{prenom_destinataire}} </dd>
+                <dt>Téléphone</dt>
+                <dd>  +225 {{contact_destinataire}}</dd>
+              </dl>
+            </dd>
+        </dl>
+      </section>
+      <table class="cls"> 
+        <thead>
+          <tr> 
+            <th>Numero</th>
+            <th>Quantite</th>
+            <th>Designation</th>
+            <th>Prix unitaire</th>
+            <th>Prix totale</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let paquet of paquets" >
+              <td>{{paquet.numero}}</td>
+              <td>{{paquet.quantite}}</td>
+              <td>{{paquet.prix_unitaire}}</td>
+              <td>{{paquet.designation}}</td>
+              <td>{{paquet.valeur}}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+          <tr> 
+              <td colspan="3">Frais Du magasin au depart</td>
+              <td>Frais:</td>
+              <td>{{frais_magasin_depart}}&#8202;FCFA</td>
+            </tr>
+            <tr> 
+              <td colspan="3">Frais Du magasin </td>
+              <td>Frais:</td>
+              <td>{{frais_magasin_depart}}&#8202;FCFA</td>
+            </tr>
+            <tr>
+                <td colspan="3">− Faire les chèques payable au nom de moi −</td>
+                <td>Total:</td>
+                <td>{{totale}}&#8202;FCFA</td>
+              </tr>
+        </tfoot>
+      </table>
+      <footer>
+         stim logistique
+      </footer>
+    
+</div>
+
+ 

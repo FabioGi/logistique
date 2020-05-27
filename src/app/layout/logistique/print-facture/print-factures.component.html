@@ -1,0 +1,108 @@
+<button (click)="print_page()" mat-raised-button type="button" color="black" ><mat-icon>print</mat-icon></button>	
+<div class="A4" id="print-section">
+      <!-- <header>
+          <div class="logo1">
+              <ngx-qrcode qrc-element-type="url" [qrc-value]="ngxQrcode2" ></ngx-qrcode >
+          </div>
+          <div class="logo2">
+              <img mat-card-image [src]="imgSrc" >
+          </div>
+        </header> -->
+        <header>
+            <h1>FACTURE</h1>
+            <h2>SITM LOGISTIQUE</h2>
+            <ngx-qrcode qrc-element-type="url" [qrc-value]="ngxQrcode2" ></ngx-qrcode >
+         </header>
+        <h1>FACTURE</h1>
+        <h2>SITM LOGISTIQUE</h2>
+     
+      <section class="flex">
+        <dl>
+          <dt>Facture #</dt>
+          <dd>{{id}}</dd>
+          <dt>Date de facturation</dt>
+          <dd>{{d | date:'dd/MM/yyyy'}}</dd>
+          <dt>Numero Colis</dt>
+          <dd>{{facture.numero_colis}}</dd>
+        </dl>
+      </section>
+      <section class="flex">
+        <dl class="bloc">
+          <dt>Client</dt>
+          <dd>
+            STIM & COMPANY, ABIDJAN <br>
+            adresse ... <br>
+            <dl>
+              <dt>INFO</dt>
+              <dd>{{facture.nom_client}} {{facture.prenom_client}} </dd>
+              <dt>Téléphone</dt>
+              <dd> +225 {{facture.contact_client}}</dd>
+            </dl>
+          </dd>
+        </dl>
+        <dl class="bloc">
+            <dt>Destinataire</dt>
+            <dd>
+              STIM & COMPANY, ABIDJAN <br>
+              adresse ... <br>
+              <dl>
+                <dt>INFO</dt>
+                <dd>{{facture.nom_destinataire}} {{facture.prenom_destinataire}} </dd>
+                <dt>Téléphone</dt>
+                <dd> +225 {{facture.contact_destinataire}}</dd>
+              </dl>
+            </dd>
+        </dl>
+      </section>
+      <table>
+        <thead>
+          <tr> 
+            <th>Numero</th>
+            <th>Quantite</th>
+            <th>Designation</th>
+            <th>Prix unitaire</th>
+            <th>Prix totale</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let paquet of facture.paquets" >
+              <td>{{paquet.numero}}</td>
+              <td>{{paquet.quantite}}</td>
+              <td>{{paquet.prix_unitaire}}</td>
+              <td>{{paquet.designation}}</td>
+              <td>{{paquet.valeur}}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+          <tr> 
+            <td colspan="3">Frais additionnels</td>
+            <td>Frais:</td>
+            <td>{{facture.frais_add}}&#8202;FCFA</td>
+          </tr>
+          <tr> 
+              <td colspan="3">Frais Du magasin au depart</td>
+              <td>Frais:</td>
+              <td>{{facture.frais_magasin_depart}}&#8202;FCFA</td>
+            </tr>
+            <tr> 
+                <td colspan="3">Frais Du magasin à l'arrivée</td>
+                <td>Frais:</td>
+                <td>{{facture.frais_magasin_dest}}&#8202;FCFA</td>
+              </tr>
+            <tr> 
+                <td colspan="3">− Faire les chèques payable au nom de moi −</td>
+                <td>Total:</td>
+                <td>{{facture.totale}}&#8202;FCFA</td>
+              </tr>
+             <tr *ngIf="facture.reduce != 0" > 
+                  <td colspan="3">{{facture.reduce}}% de reduction effectue</td>
+              </tr>
+        </tfoot>
+      </table>
+      <footer>
+         stim logistique
+      </footer>
+    
+</div>
+
+ 
